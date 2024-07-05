@@ -19,18 +19,18 @@ void UCSVFileObject::SaveFile()
 	FFileHelper::SaveStringToFile(AppendHeaderAndContent(),*GetFilePath(),FFileHelper::EEncodingOptions::ForceUTF8,&IFileManager::Get(),FILEWRITE_None);
 }
 
-void UCSVFileObject::AppendCSVLine(UCSVLine* Line)
+void UCSVFileObject::AppendCSVLine(FCSVLine Line)
 {
-	FString JoinedArray = UKismetStringLibrary::JoinStringArray(Line->ColumnValues,CSVDelimitor);
+	const FString JoinedArray = UKismetStringLibrary::JoinStringArray(Line.ColumnValues,CSVDelimitor);
 	CSVContent+=JoinedArray+"\n";
 	SaveFile();
 }
 
-void UCSVFileObject::AppendCSVLines(TArray<UCSVLine*> Lines)
+void UCSVFileObject::AppendCSVLines(TArray<FCSVLine> Lines)
 {
 	for (auto Line : Lines)
 	{
-		FString JoinedArray = UKismetStringLibrary::JoinStringArray(Line->ColumnValues,CSVDelimitor);
+		const FString JoinedArray = UKismetStringLibrary::JoinStringArray(Line.ColumnValues,CSVDelimitor);
 		CSVContent+=JoinedArray+"\n";
 	}
 

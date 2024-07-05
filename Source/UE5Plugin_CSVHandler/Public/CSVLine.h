@@ -7,17 +7,13 @@
 #include "CSVLine.generated.h"
 
 /**
- * 
+ * Cet objet correspond à une ligne du fichier CSV
  */
-UCLASS(BlueprintType)
-class UCSVLine : public UObject
+USTRUCT(BlueprintType)
+struct FCSVLine
 {
 	GENERATED_BODY()
-
-public:
+	
 	UPROPERTY(BlueprintReadWrite)
 	TArray<FString> ColumnValues;
-
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	static UCSVLine* MakeCSVLine(TArray<FString> Values);
 };
