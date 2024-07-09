@@ -11,15 +11,16 @@ class UCSVLine;
 /**
  * cet objet correspond à un fichier CSV
  */
-UCLASS()
+UCLASS(BlueprintType)
 class UCSVFileObject : public UObject
 {
 	GENERATED_BODY()
 
 public:
 	//fonction statique permettant de créer un fichier CSV
+	//pas besoin de mettre .csv dans le nom du fichier
 	UFUNCTION(BlueprintCallable)
-	static UCSVFileObject* CreateCSVFile(const FString& Header, const FString& Name, const FString& Delimitor, const FString& OutputFolder);
+	static UCSVFileObject* CreateCSVFile(const FString& Header, const FString& FileName, const FString& Delimitor, const FString& OutputFolder);
 
 	//sauvegarde du fichier manuelle
 	UFUNCTION(BlueprintCallable)
@@ -27,11 +28,11 @@ public:
 
 	//ajout d'une ligne et sauvegarde automatique
 	UFUNCTION(BlueprintCallable)
-	void AppendCSVLine(FCSVLine Line);
+	void AppendCSVLine(FCSVLine Line,bool AutoSaveFile = true);
 
 	//ajout de plusieurs lignes et sauvegarde automatique
 	UFUNCTION(BlueprintCallable)
-	void AppendCSVLines(TArray<FCSVLine> Lines);
+	void AppendCSVLines(TArray<FCSVLine> Lines,bool AutoSaveFile = true);
 
 protected:
 	//la première ligne du CSV
